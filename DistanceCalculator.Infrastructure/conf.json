@@ -1,0 +1,3 @@
+﻿{
+  "DatabaseConnection": "User ID=postgres;Password=Pulse2data;Host=localhost;Port=5432;Database=distance;Pooling=true;"
+}
