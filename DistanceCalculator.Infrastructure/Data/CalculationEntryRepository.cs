@@ -13,11 +13,6 @@ namespace DistanceCalculator.Infrastructure.Data
 
         private bool _disposed  = false;
 
-        public CalculationEntryRepository()
-        {
-            _dataContext = new DataContext();
-        }
-        
         public CalculationEntryRepository([NotNull] DataContext dataContext)
         {
             _dataContext = dataContext;

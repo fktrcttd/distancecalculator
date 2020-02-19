@@ -1,14 +1,15 @@
+using System;
 using DistanceCalculator.Domain.Interfaces;
 using DistanceCalculator.Infrastructure.Data;
 using DistanceCalculator.Services.Core;
 using DistanceCalculator.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 
 namespace DistanceCalculator.Web
@@ -28,13 +29,25 @@ namespace DistanceCalculator.Web
             services.AddControllersWithViews();
             services.AddScoped<IDistanceCalculationService, DistanceCalculationService>();
             services.AddScoped<ICalculationEntryRepository, CalculationEntryRepository>();
+            
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<DataContext>(option => option.UseNpgsql(connectionString));
+
+            ServiceProvider serviceProvider = services.BuildServiceProvider();
+            var appDbContext = serviceProvider.GetService<DataContext>();
+
+            services.RegisterDistanceCalculatorInfrastructure(appDbContext); 
+            
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext dataContext)
         {
+             
+            dataContext.Database.Migrate();
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -69,5 +82,19 @@ namespace DistanceCalculator.Web
                 }
             });
         }
+    }
+}
+
+public static class ServiceCollectionExtensions
+{
+
+    public static void RegisterDistanceCalculatorInfrastructure(this IServiceCollection services, DataContext dbContext)
+    {
+        if (dbContext == null)
+        {
+            throw new ArgumentNullException(nameof(dbContext));
+        }
+
+        services.AddScoped(uow => new UnitOfWork(dbContext));
     }
 }

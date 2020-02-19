@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceCalculator.Services
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceCalculator.Infrastructure", "DistanceCalculator.Infrastructure\DistanceCalculator.Infrastructure.csproj", "{D4B839BF-680F-46ED-B3BA-64CDFB957C83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceCalculator.Web", "DistanceCalculator.Web\DistanceCalculator.Web.csproj", "{0915E6C8-79FF-48DD-AF81-C47CD7385A55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceCalculator.Web", "DistanceCalculator.Web\DistanceCalculator.Web.csproj", "{EDB010C3-98E9-4491-841C-92FBAD3AB53A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,9 +32,9 @@ Global
 		{D4B839BF-680F-46ED-B3BA-64CDFB957C83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4B839BF-680F-46ED-B3BA-64CDFB957C83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4B839BF-680F-46ED-B3BA-64CDFB957C83}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0915E6C8-79FF-48DD-AF81-C47CD7385A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0915E6C8-79FF-48DD-AF81-C47CD7385A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0915E6C8-79FF-48DD-AF81-C47CD7385A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0915E6C8-79FF-48DD-AF81-C47CD7385A55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDB010C3-98E9-4491-841C-92FBAD3AB53A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDB010C3-98E9-4491-841C-92FBAD3AB53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDB010C3-98E9-4491-841C-92FBAD3AB53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDB010C3-98E9-4491-841C-92FBAD3AB53A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

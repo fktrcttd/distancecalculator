@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using DistanceCalculator.Domain.Core;
 using DistanceCalculator.Domain.Interfaces;
@@ -13,13 +14,22 @@ namespace DistanceCalculator.Services.Core
     {
         private ICalculationEntryRepository _repository;
 
-        public DistanceCalculationService(ICalculationEntryRepository repository)
+        public DistanceCalculationService(UnitOfWork unitOfWork)
         {
-            _repository = repository;
+            _repository = unitOfWork.CalculationEntryRepository;
         }
         
         public CalculationEntry CalculateCameraParameters(DistanceToDevice distanceToDevice, DistanceToObject distanceToObject, CalculationMode calculation)
         {
+            if (distanceToDevice is null )
+            {
+                throw new ArgumentException(nameof(distanceToDevice));
+            }
+
+            if (distanceToObject is null)
+            {
+                throw new ArgumentException(nameof(distanceToObject));    
+            }
             var aCathet = new Side(distanceToObject.Val, TriangleSideTypes.Cathet);
             var bCathet = new Side(distanceToDevice.Val - Constant.AverageHumanHeight, TriangleSideTypes.Cathet);
             var hypotenuse = new Side(GetHypotenusesLength(aCathet.Length, bCathet.Length), TriangleSideTypes.Hypotenuse);

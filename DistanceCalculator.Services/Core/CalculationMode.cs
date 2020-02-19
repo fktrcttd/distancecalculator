@@ -1,4 +1,4 @@
-﻿namespace DistanceCalculator.Services.Interfaces
+﻿namespace DistanceCalculator.Services.Core
 {
     public enum CalculationMode
     {
